@@ -1,79 +1,47 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f3f4f6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+let qr;
+
+function generateQRCode() {
+  const text = document.getElementById("text").value.trim();
+  const size = parseInt(document.getElementById("size").value);
+  const fgColor = document.getElementById("fgColor").value;
+  const bgColor = document.getElementById("bgColor").value;
+  const qrDiv = document.getElementById("qrcode");
+
+  qrDiv.innerHTML = "";
+
+  if (!text) {
+    alert("텍스트를 입력해주세요.");
+    return;
+  }
+
+  qr = new QRCode(qrDiv, {
+    text: text,
+    width: size,
+    height: size,
+    colorDark: fgColor,
+    colorLight: bgColor,
+  });
 }
 
-.container {
-  background: white;
-  padding: 30px 20px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 100%;
-  max-width: 420px;
-}
+function downloadQRCode() {
+  const qrDiv = document.getElementById("qrcode");
+  const text = document.getElementById("text").value.trim();
+  const fileName = text ? `${text.substring(0, 10)}.png` : "qrcode.png";
 
-h2 {
-  margin-bottom: 20px;
-}
+  const img = qrDiv.querySelector("img");
+  if (img) {
+    const link = document.createElement("a");
+    link.href = img.src;
+    link.download = fileName;
+    link.click();
+    return;
+  }
 
-input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.controls {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-  font-size: 14px;
-  text-align: left;
-}
-
-.controls label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-button {
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button.generate {
-  background-color: #3b82f6;
-  color: white;
-}
-
-button.download {
-  background-color: #10b981;
-  color: white;
-}
-
-@media (min-width: 480px) {
-  .button-group {
-    flex-direction: row;
-    justify-content: center;
+  const canvas = qrDiv.querySelector("canvas");
+  if (canvas) {
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = fileName;
+    link.click();
   }
 }
