@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QR 코드 생성기</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
@@ -10,13 +11,13 @@
   <div class="container">
     <h2>QR 코드 생성기</h2>
     <input type="text" id="text" placeholder="텍스트 또는 URL 입력" />
-    <div>
+    <div class="button-group">
       <button class="generate" onclick="generateQRCode()">QR 코드 생성</button>
       <button class="download" onclick="downloadQRCode()">이미지 다운로드</button>
     </div>
     <div id="qrcode"></div>
   </div>
 
-  <script src="script.js"></script> <!-- JS 파일 연결 -->
+  <script src="script.js"></script>
 </body>
 </html>
