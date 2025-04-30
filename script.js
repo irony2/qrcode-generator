@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -20,23 +16,35 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 100%;
-  max-width: 400px;
-  margin: 20px;
+  max-width: 420px;
 }
 
 h2 {
   margin-bottom: 20px;
-  font-size: 1.5em;
-  color: #333;
 }
 
-input {
+input[type="text"] {
   width: 100%;
   padding: 12px;
   font-size: 16px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.controls label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .button-group {
@@ -67,10 +75,5 @@ button.download {
   .button-group {
     flex-direction: row;
     justify-content: center;
-  }
-
-  button {
-    width: auto;
-    min-width: 140px;
   }
 }
