@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>QR 코드 생성기</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 5px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button.generate {
+      background: #3b82f6;
+      color: white;
+    }
+
+    button.generate:hover {
+      background: #2563eb;
+    }
+
+    button.download {
+      background: #10b981;
+      color: white;
+    }
+
+    button.download:hover {
+      background: #059669;
+    }
+
+    #qrcode {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>QR 코드 생성기</h2>
+    <input type="text" id="text" placeholder="텍스트 또는 URL 입력" />
+    <div>
+      <button class="generate" onclick="generateQRCode()">QR 코드 생성</button>
+      <button class="download" onclick="downloadQRCode()">이미지 다운로드</button>
+    </div>
+    <div id="qrcode"></div>
+  </div>
+
+  <script>
+    let qr;
+
+    function generateQRCode() {
+      const inputText = document.getElementById("text").value.trim();
+      const qrDiv = document.getElementById("qrcode");
+
+      qrDiv.innerHTML = "";
+
+      if (!inputText) {
+        alert("텍스트나 URL을 입력해주세요.");
+        return;
+      }
+
+      qr = new QRCode(qrDiv, {
+        text: inputText,
+        width: 200,
+        height: 200,
+      });
+    }
+
+    function downloadQRCode() {
+      const qrDiv = document.getElementById("qrcode");
+      const img = qrDiv.querySelector("img");
+      if (img) {
+        const link = document.createElement("a");
+        link.href = img.src;
+        link.download = "qrcode.png";
+        link.click();
+      }
+
+      const canvas = qrDiv.querySelector("canvas");
+      if (canvas) {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "qrcode.png";
+        link.click();
+      }
+    }
+  </script>
+</body>
+</html>
