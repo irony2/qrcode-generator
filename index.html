@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QR 코드 생성기</title>
   <link rel="stylesheet" href="style.css" />
@@ -11,10 +11,29 @@
   <div class="container">
     <h2>QR 코드 생성기</h2>
     <input type="text" id="text" placeholder="텍스트 또는 URL 입력" />
+
+    <div class="controls">
+      <label>QR 크기:
+        <select id="size">
+          <option value="150">150px</option>
+          <option value="200" selected>200px</option>
+          <option value="300">300px</option>
+          <option value="400">400px</option>
+        </select>
+      </label>
+      <label>전경 색상:
+        <input type="color" id="fgColor" value="#000000" />
+      </label>
+      <label>배경 색상:
+        <input type="color" id="bgColor" value="#ffffff" />
+      </label>
+    </div>
+
     <div class="button-group">
       <button class="generate" onclick="generateQRCode()">QR 코드 생성</button>
       <button class="download" onclick="downloadQRCode()">이미지 다운로드</button>
     </div>
+
     <div id="qrcode"></div>
   </div>
 
